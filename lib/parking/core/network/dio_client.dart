@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:parking_demo/parking/core/constant/api_endpoints.dart';
 
@@ -14,6 +15,19 @@ class DioClient {
       ),
     );
 
+    if (kDebugMode) {
+      _dio.interceptors.add(
+        LogInterceptor(
+          error: true,
+          request: true,
+          requestBody: true,
+          requestHeader: true,
+          responseBody: true,
+          responseHeader: true,
+        ),
+      );
+    }
+
     _dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (option, handler) {
@@ -24,7 +38,9 @@ class DioClient {
           return handler.next(response);
         },
         onError: (DioException exception, handler) {
-          print(exception.toString());
+          if (kDebugMode) {
+            print(exception.toString());
+          }
           return handler.next(exception);
         },
       ),
