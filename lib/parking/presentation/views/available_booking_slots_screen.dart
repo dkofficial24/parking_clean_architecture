@@ -16,28 +16,38 @@ class AvailableSlotsScreen extends StatelessWidget {
       },
       child: Scaffold(
         appBar: AppBar(title: Text('Available Slots')),
-        body: BlocBuilder<ParkingBloc, ParkingState>(
-          builder: (context, state) {
-            if (state is ParkingLoading || state is ParkingInitial) {
-              return Center(child: CircularProgressIndicator());
-            }
-
+        body: BlocListener<ParkingBloc, ParkingState>(
+          listener: (context, state) {
             if (state is ParkingError) {
-              return Center(child: Text(state.error));
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(SnackBar(content: Text(state.error)));
             }
-
-            return ListView.builder(
-              itemCount: (state as ParkingLoaded).parkingSlots.length,
-              itemBuilder: (context, index) {
-                final parkingSlot =
-                    state.parkingSlots[index];
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ListTile(title: Text(parkingSlot.name)),
-                );
-              },
-            );
           },
+          child: BlocBuilder<ParkingBloc, ParkingState>(
+            builder: (context, state) {
+              if (state is ParkingLoading) {
+                return const Center(child: CircularProgressIndicator());
+              }
+
+              if (state is ParkingError) {
+                return Center(child: Text(state.error));
+              }
+              if (state is ParkingLoaded) {
+                return ListView.builder(
+                  itemCount: (state).parkingSlots.length,
+                  itemBuilder: (context, index) {
+                    final parkingSlot = state.parkingSlots[index];
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ListTile(title: Text(parkingSlot.name)),
+                    );
+                  },
+                );
+              }
+              return const SizedBox.shrink();
+            },
+          ),
         ),
       ),
     );

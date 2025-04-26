@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:parking_demo/parking/domain/use_cases/fetching_parking_slot.dart';
+import 'package:parking_demo/parking/domain/use_cases/fetch_parking_slot.dart';
 import 'package:parking_demo/parking/presentation/bloc/parking_events.dart';
 import 'package:parking_demo/parking/presentation/bloc/parking_states.dart';
 
