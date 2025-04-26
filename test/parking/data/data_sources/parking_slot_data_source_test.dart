@@ -3,18 +3,22 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:parking_demo/parking/core/constant/api_endpoints.dart';
+import 'package:parking_demo/parking/core/network/dio_client.dart';
 import 'package:parking_demo/parking/data/data_sources/remote_parking_slot_data_source.dart';
 import 'package:parking_demo/parking/data/model/parking_slot_model.dart';
 
 import 'parking_slot_data_source_test.mocks.dart';
 
-@GenerateMocks([Dio])
+@GenerateMocks([DioClient, Dio])
 void main() {
-  late MockDio mockDio;
+  late MockDioClient mockDioClient;
   late RemoteParkingSlotDataSource dataSource;
+  late MockDio mockDio;
   setUpAll(() {
     mockDio = MockDio();
-    dataSource = RemoteParkingSlotDataSource(mockDio);
+    mockDioClient = MockDioClient();
+    when(mockDioClient.dio).thenReturn(mockDio);
+    dataSource = RemoteParkingSlotDataSource(mockDioClient);
   });
 
   final mockResponseData = [
@@ -51,7 +55,9 @@ void main() {
   ];
 
   test('should fetch list of slots ', () async {
-    when(mockDio.get(ApiEndpoints.parkingSlots)).thenAnswer((_) async {
+    when(mockDio.get(ApiEndpoints.parkingSlots)).thenAnswer((
+      _,
+    ) async {
       return Response(
         requestOptions: RequestOptions(path: ApiEndpoints.parkingSlots),
         data: mockResponseData,

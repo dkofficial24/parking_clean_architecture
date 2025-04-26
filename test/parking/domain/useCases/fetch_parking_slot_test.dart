@@ -2,7 +2,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:parking_demo/parking/core/errors.dart';
+import 'package:parking_demo/parking/data/model/location_model.dart';
 import 'package:parking_demo/parking/data/model/parking_slot_model.dart';
+import 'package:parking_demo/parking/data/model/timing_model.dart';
 import 'package:parking_demo/parking/data/repositories/parking_repository_impl.dart';
 import 'package:parking_demo/parking/domain/use_cases/fetch_parking_slot.dart';
 
