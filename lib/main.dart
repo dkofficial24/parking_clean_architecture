@@ -5,7 +5,7 @@ import 'parking/presentation/views/available_booking_slots_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  diInit();
+  configureDependency();
 
   runApp(const MyApp());
 }
