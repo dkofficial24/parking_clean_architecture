@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:parking_demo/parking/presentation/bloc/parking_bloc.dart';
+import 'package:parking_demo/parking/presentation/bloc/parking_events.dart';
+import 'package:parking_demo/parking/presentation/bloc/parking_states.dart';
 
 import 'parking/core/di/di_injection.dart';
 import 'parking/presentation/views/available_booking_slots_screen.dart';
@@ -21,7 +25,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: AvailableSlotsScreen(),
+      home: BlocProvider<ParkingBloc>(
+        create: (_)=>getIt<ParkingBloc>()..add(FetchedParking()),
+        child: AvailableSlotsScreen()
+      ),
     );
   }
 }

@@ -1,35 +1,13 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:parking_demo/parking/data/model/parking_slot_model.dart';
 
-abstract class ParkingState {}
+part 'parking_states.freezed.dart';
 
-class ParkingInitial extends ParkingState {}
-
-class ParkingLoading extends ParkingState {}
-
-class ParkingLoaded extends ParkingState {
-  final List<ParkingSlotModel> parkingSlots;
-
-  ParkingLoaded(this.parkingSlots);
-
-  ParkingLoaded copyWith({
-    List<ParkingSlotModel>? parkingSlots,
-  }) {
-    return ParkingLoaded(
-      parkingSlots ?? this.parkingSlots,
-    );
-  }
+@freezed
+sealed class ParkingState with _$ParkingState {
+  const factory ParkingState.parkingInitial() = ParkingInitial;
+  const factory ParkingState.parkingLoading() = ParkingLoading;
+  const factory ParkingState.parkingError(String error) = ParkingError;
+  const factory ParkingState.parkingLoaded(List<ParkingSlotModel> parkingSlots) = ParkingLoaded;
 }
 
-class ParkingError extends ParkingState {
-  final String error;
-
-  ParkingError(this.error);
-
-  ParkingError copyWith({
-    String? error,
-  }) {
-    return ParkingError(
-      error ?? this.error,
-    );
-  }
-}
