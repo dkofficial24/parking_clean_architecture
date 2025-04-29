@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:parking_demo/localization/localization_hi.i69n.dart';
 import 'package:parking_demo/parking/presentation/bloc/parking_bloc.dart';
 import 'package:parking_demo/parking/presentation/bloc/parking_states.dart';
 
@@ -10,7 +9,7 @@ class AvailableSlotsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(const Localization_hi().title)),
+      appBar: AppBar(title: Text('Available Slot')),
       body: BlocListener<ParkingBloc, ParkingState>(
         listener: (context, state) {
           if (state is ParkingError) {

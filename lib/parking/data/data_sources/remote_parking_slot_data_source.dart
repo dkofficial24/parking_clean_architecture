@@ -16,7 +16,7 @@ class RemoteParkingSlotDataSource implements ParkingSlotDataSource {
     if (response.statusCode == 200) {
       final data = response.data as List;
       return data.map((element) {
-        return ParkingSlotModel.fromJson(element);
+        return ParkingSlotModel.fromJson(element as Map<String, dynamic>);
       }).toList();
     } else {
       throw Exception('Something went wrong');
