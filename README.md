@@ -1,16 +1,29 @@
-# parking_demo
+# 🧼 Flutter Clean Architecture Template
 
-A new Flutter project.
+A Flutter starter project demonstrating **Clean Architecture** with proper separation of concerns. It uses **Bloc** for state management, **GetIt + Injectable** for dependency injection, and supports **unit tests** and **BDD-style widget tests**.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 📦 Features
 
-A few resources to get you started if this is your first Flutter project:
+- Clean Architecture: Presentation, Domain, Data layers
+- Dependency Injection using GetIt and Injectable
+- State Management using flutter_bloc
+- Unit Tests for use cases and core logic
+- BDD-style Widget Tests for UI flows
+- Scalable and maintainable project structure
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# Code Generation Command
+flutter pub run build_runner build --delete-conflicting-outputs
+
+# Test Folder Structure
+test/
+├── parking/
+│   ├── data/
+│   └── domain/
+├── feature/ 
+│   ├── parking.feature
+│   └── parking_test.dart
+
