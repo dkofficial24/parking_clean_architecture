@@ -3,15 +3,16 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:parking_demo/parking/core/di/di_injection.dart';
 
 import './step/app_configs_are_setup.dart';
-import './step/available_slots_state_is_in_waiting_state.dart';
-import './step/the_app_is_running.dart';
-import './step/i_see_circularprogressindicator.dart';
-import './step/available_slot_state_is_in_loaded_state.dart';
-import './step/i_see_list_of_list_tile.dart';
 import './step/available_slot_state_is_in_error_state.dart';
+import './step/available_slot_state_is_in_loaded_state.dart';
+import './step/available_slots_state_is_in_waiting_state.dart';
+import './step/i_see_circularprogressindicator.dart';
+import './step/i_see_list_of_list_tile.dart';
 import './step/i_see_text.dart';
+import './step/the_app_is_running.dart';
 
 void main() {
   group('''Parking app''', () {
@@ -31,8 +32,9 @@ void main() {
       await theAppIsRunning(tester);
       await iSeeListOfListTile(tester);
     });
-    testWidgets('''See an error when available screen is shown''',
-        (tester) async {
+    testWidgets('''See an error when available screen is shown''', (
+      tester,
+    ) async {
       await bddSetUp(tester);
       await availableSlotStateIsInErrorState(tester);
       await theAppIsRunning(tester);

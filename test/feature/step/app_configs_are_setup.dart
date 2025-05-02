@@ -7,6 +7,8 @@ import '../util/di_helper.mocks.dart';
 
 /// Usage: app configs are setup
 Future<void> appConfigsAreSetup(WidgetTester tester) async {
-  getIt.registerSingleton<MockParkingBloc>(MockParkingBloc());
+  if (!(getIt.isRegistered<MockParkingBloc>())) {
+    getIt.registerSingleton<MockParkingBloc>(MockParkingBloc());
+  }
   provideDummy<ParkingState>(ParkingInitial());
 }
