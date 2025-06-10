@@ -4,9 +4,8 @@ import 'package:parking_demo/parking/core/di/di_injection.dart';
 import 'package:parking_demo/parking/data/model/location_model.dart';
 import 'package:parking_demo/parking/data/model/parking_slot_model.dart';
 import 'package:parking_demo/parking/data/model/timing_model.dart';
+import 'package:parking_demo/parking/presentation/bloc/parking_bloc.dart';
 import 'package:parking_demo/parking/presentation/bloc/parking_states.dart';
-
-import '../util/di_helper.mocks.dart';
 
 /// Usage: available slot state is in loaded state
 Future<void> availableSlotStateIsInLoadedState(WidgetTester tester) async {
@@ -58,7 +57,5 @@ Future<void> availableSlotStateIsInLoadedState(WidgetTester tester) async {
     ),
   ];
 
-  when(
-    getIt<MockParkingBloc>().state,
-  ).thenReturn(ParkingLoaded(dummyParkingSlots));
+  when(getIt<ParkingBloc>().state).thenReturn(ParkingLoaded(dummyParkingSlots));
 }
